@@ -1,0 +1,29 @@
+name: Generate issue from error and warning in our logs
+on:
+  schedule:
+  # the day of the month we run zyte – https://crontab.guru
+  - cron: 0 0 1 * *
+
+jobs:
+  errorReport:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.error_report.outputs.matrix }}
+    steps:
+      id: error_report
+      run: value = python_script.py secret.APIKEY '282053'
+		       echo “::set-output name={name}::{value}”
+
+  create_issue:
+    need: [errorReport]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+####${{ fromJson(needs.errorReport.outputs.matrix) }} // maybe this
+        node: ${{needs.errorReport.outputs.matrix}} // maybe this
+
+    # Create new issue with assignees, labels, title, and body
+    - uses: imjohnbo/issue-bot@v3
+      with:
+        title: ${{ matrix.node.spider}}
+        body: ${{ matrix.node. message}}
