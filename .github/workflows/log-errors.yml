@@ -18,12 +18,13 @@ jobs:
         echo "::set-output name=matrix::${MATRIX}"
 
   create_issue:
-    need: [errorReport]
+    needs: [errorReport]
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node: ${{needs.errorReport.outputs.matrix}}
-    uses: imjohnbo/issue-bot@v3
-      with:
-        title: ${{ matrix.node.spider}}
-        body: ${{ matrix.node. message}}
+    steps:
+      uses: imjohnbo/issue-bot@v3
+        with:
+          title: ${{ matrix.node.spider}}
+          body: ${{ matrix.node. message}}
