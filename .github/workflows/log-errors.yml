@@ -22,11 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-####${{ fromJson(needs.errorReport.outputs.matrix) }} // maybe this
         node: ${{needs.errorReport.outputs.matrix}}
-
-    # Create new issue with assignees, labels, title, and body
-    - uses: imjohnbo/issue-bot@v3
+    uses: imjohnbo/issue-bot@v3
       with:
         title: ${{ matrix.node.spider}}
         body: ${{ matrix.node. message}}
