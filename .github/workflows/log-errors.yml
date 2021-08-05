@@ -22,9 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ${{needs.errorReport.outputs.matrix}}
+        ${{ fromJson(needs.errorReport.outputs.matrix) }} 
     steps:
       uses: imjohnbo/issue-bot@v3
-        with:
-          title: ${{ matrix.node.spider}}
-          body: ${{ matrix.node. message}}
+      with:
+          title: ${{ matrix.spider}}
+          body: ${{ matrix. message}}
