@@ -11,7 +11,7 @@ jobs:
       matrix: ${{ steps.error_report.outputs.matrix }}
     steps:
       id: error_report
-      run: value = python_script.py secret.APIKEY '282053'
+      run: value = python_script.py secrets.APIKEY '282053'
 	   echo “::set-output name={name}::{value}”
 
   create_issue:
