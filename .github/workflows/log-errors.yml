@@ -20,4 +20,17 @@ jobs:
         id: error_report
         run: |
               OUTPUT=$(python ApiError.py secrets.APIKEY '282053' )
-              echo "::set-output name=matrix::${MATRIX}"
+              echo "::set-output name=OUTPUT::$OUTPUT"
+  create_issue:
+    needs: [errorReport]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+            ${{ fromJson(needs.errorReport.outputs.matrix) }}     
+    steps:
+      - name: issue maker    
+        uses: imjohnbo/issue-bot@v3
+        with:
+          title: ${{ matrix.spider}}
+          body: ${{ matrix. message}}
+      
