@@ -19,6 +19,7 @@ jobs:
       - name: Run error report
         id: error_report
         run: |
+              pip install scrapinghub
               OUTPUT=$(python ApiError.py secrets.APIKEY '282053' )
               echo "::set-output name=OUTPUT::$OUTPUT"
   create_issue:
