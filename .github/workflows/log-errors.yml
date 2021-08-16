@@ -20,6 +20,6 @@ jobs:
               echo "::set-output name=test::hello"
       - name: print output
         run: |
-             echo ${{needs.error_report.outputs.output1}}
+             echo ${{needs.errorReport.outputs.output1}}
             
       
