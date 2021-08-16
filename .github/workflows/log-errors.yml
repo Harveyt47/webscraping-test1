@@ -19,5 +19,5 @@ jobs:
       - name: Run error report
         id: error_report
         run: |
-              OUTPUT=$(python ApiErrors.py secrets.APIKEY '282053' )
+              OUTPUT=$(python ApiError.py secrets.APIKEY '282053' )
               echo "::set-output name=matrix::${MATRIX}"
