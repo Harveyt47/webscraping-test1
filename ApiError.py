@@ -23,4 +23,4 @@ def ApiError(apikey, project_id):
     return matrix
 
 if __name__ == "__main__":
-    ApiError(sys.argv[1])
+    ApiError(sys.argv[1], sys.argv[2])
