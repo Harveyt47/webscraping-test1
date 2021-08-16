@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest 
     strategy:
       matrix:
-            ${{needs.errorReport.outputs.matrix}}     
+            ${{fromJson(needs.errorReport.outputs.matrix)}}     
     steps:
       - name: issue maker    
         if: matrix. message != ''
