@@ -24,7 +24,6 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
       - name: issue maker    
-        if: matrix. message != ''
         uses: imjohnbo/issue-bot@v3
         with:
           title: ${{needs.errorReport.outputs.matrix.spider}}
