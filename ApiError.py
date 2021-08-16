@@ -1,7 +1,7 @@
 from scrapinghub import ScrapinghubClient
 import sys
-def ApiError(apikey, project_id):
-    client = ScrapinghubClient(apikey)
+def ApiError(project_id):
+    client = ScrapinghubClient('3f799fbc357a4dc1a89018a10d2fe658')
     project = client.get_project(project_id)
     spiders = project.spiders
     spider_list = spiders.list()
