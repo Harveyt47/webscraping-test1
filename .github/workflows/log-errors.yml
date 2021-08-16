@@ -22,9 +22,9 @@ jobs:
               
   two:
     runs-on: ubuntu-latest
-    needs: one
+    needs: errorReport
     steps:
-    - run: echo '${{ needs.one.outputs.matrix }}'
+    - run: echo '${{ needs.errorReport.outputs.matrix }}'
     
   create_issue:
     needs: [errorReport]
