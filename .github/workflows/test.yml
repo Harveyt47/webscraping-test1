@@ -2,7 +2,7 @@ name: Generate issue from error and warning in our logs
 on: push
 
 jobs:
-  errorReport:
+  job1:
     runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
@@ -21,6 +21,6 @@ jobs:
               echo "::set-output name=test::hello"
   job2:
     runs-on: ubuntu-latest
-    needs: errorReport
+    needs: job1
     steps:
-      - run: echo ${{needs.errorReport.outputs.output1}} 
+      - run: echo ${{needs.job1.outputs.output1}} 
