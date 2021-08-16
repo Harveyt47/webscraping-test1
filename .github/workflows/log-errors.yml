@@ -5,7 +5,7 @@ jobs:
   errorReport:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.step1.outputs.test }}
+      output1: ${{ steps.error_report.outputs.test }}
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content to github runner.
