@@ -19,7 +19,9 @@ jobs:
           python-version: 3.8 #install the python needed#OUTPUT=$(python ApiError.py '282053' )
       - name: step 1
         id: step1
-        run: echo "::set-output name=test::hello"
+        run: |
+              pip install scrapinghub
+              echo "::set-output name=test::hello"
       - name: step 2
         id: step2
         run: echo "::set-output name=test::world"
