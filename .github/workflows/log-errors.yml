@@ -20,12 +20,6 @@ jobs:
               OUTPUT=$(python ApiError.py '282053' )
               echo "::set-output name=matrix::$OUTPUT"
               
-  two:
-    runs-on: ubuntu-latest
-    needs: errorReport
-    steps:
-    - run: echo '${{ needs.errorReport.outputs.matrix }}'
-    
   create_issue:
     needs: [errorReport]
     runs-on: ubuntu-latest 
