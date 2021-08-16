@@ -19,6 +19,7 @@ def ApiError(project_id):
             for log in error_logs:
                 message = message + ' ' + log['message'] 
             matrix["include"].append({'spider':name, 'message':message})
+    print(matrix)    
     return matrix
 
 if __name__ == "__main__":
