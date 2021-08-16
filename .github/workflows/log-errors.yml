@@ -5,7 +5,7 @@ jobs:
   errorReport:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.error_report.outputs.matrix }}
+      output1: ${{ steps.step1.outputs.test }}
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content to github runner.
@@ -17,9 +17,9 @@ jobs:
         id: error_report
         run: |
               pip install scrapinghub
-              echo "::set-output name=matrix::hello"
+              echo "::set-output name=test::hello"
       - name: print output
         run: |
-             echo "${{ steps.error_report.outputs.maxtrix }}"
+             echo ${{needs.job1.outputs.output1}}
             
       
