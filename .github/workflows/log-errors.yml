@@ -19,14 +19,8 @@ jobs:
               pip install scrapinghub
               OUTPUT=$(python ApiError.py '282053' )
               echo "::set-output name=matrix::$OUTPUT"
-              
-  create_issue:
-    needs: [errorReport]
-    runs-on: ubuntu-latest 
-    steps:
-      - name: issue maker    
-        uses: imjohnbo/issue-bot@v3
-        with:
-          title: ${{needs.errorReport.outputs.matrix.spider}}
-          body: ${{needs.errorReport.outputs.matrix.message}}
+      - name: print output
+        run: |
+             echo "${{ steps.error_report.outputs.maxtrix }}"
+            
       
