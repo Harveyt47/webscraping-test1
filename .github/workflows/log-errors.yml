@@ -12,13 +12,12 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8 #install the python needed
+          python-version: 3.8 #install the python needed#OUTPUT=$(python ApiError.py '282053' )
       - name: Run error report
         id: error_report
         run: |
               pip install scrapinghub
-              OUTPUT=$(python ApiError.py '282053' )
-              echo "::set-output name=matrix::$OUTPUT"
+              echo "::set-output name=matrix::hello"
       - name: print output
         run: |
              echo "${{ steps.error_report.outputs.maxtrix }}"
