@@ -1,7 +1,7 @@
 from scrapinghub import ScrapinghubClient
 import sys
-def ApiError(project_id):
-    client = ScrapinghubClient('3f799fbc357a4dc1a89018a10d2fe658')
+def ApiError(apikey, project_id):
+    client = ScrapinghubClient(apikey)
     project = client.get_project(project_id)
     spiders = project.spiders
     spider_list = spiders.list()
@@ -22,4 +22,4 @@ def ApiError(project_id):
     return matrix
 
 if __name__ == "__main__":
-    ApiError(sys.argv[1])
+    ApiError(sys.argv[1], sys.argv[2])
