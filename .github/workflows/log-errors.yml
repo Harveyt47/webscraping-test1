@@ -19,6 +19,13 @@ jobs:
               pip install scrapinghub
               OUTPUT=$(python ApiError.py '282053' )
               echo "::set-output name=matrix::$OUTPUT"
+              
+  two:
+    runs-on: ubuntu-latest
+    needs: one
+    steps:
+    - run: echo '${{ needs.one.outputs.matrix }}'
+    
   create_issue:
     needs: [errorReport]
     runs-on: ubuntu-latest 
