@@ -18,7 +18,8 @@ jobs:
         id: step1
         run: |
               pip install scrapinghub
-              echo "::set-output name=test::hello"
+              OUTPUT=$(python ApiError.py '282053' )
+              echo "::set-output name=test::$OUTPUT"
   job2:
     runs-on: ubuntu-latest
     needs: job1
