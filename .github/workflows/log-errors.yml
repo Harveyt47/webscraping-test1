@@ -10,21 +10,14 @@ jobs:
     outputs:
       matrix: ${{ steps.error_report.outputs.matrix }}
     steps:
-      id: error_report
-      run: |
-        ApiErrors.py secrets.APIKEY '282053'
-        MATRIX=$(cat matrix.json)
-        echo "${MATRIX}"
-        echo "::set-output name=matrix::${MATRIX}"
-
-  create_issue:
-    needs: [errorReport]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ${{ fromJson(needs.errorReport.outputs.matrix) }} 
-    steps:
-      uses: imjohnbo/issue-bot@v3
-      with:
-          title: ${{ matrix.spider}}
-          body: ${{ matrix. message}}
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 #install the python needed
+      - name: Run error report
+        id: error_report
+        run: |
+              OUTPUT=$(python ApiErrors.py secrets.APIKEY '282053' )
+              echo "::set-output name=matrix::${MATRIX}"
