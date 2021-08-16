@@ -1,4 +1,4 @@
-name: Generate issue from error and warning in our logs
+name: Test
 on: push
 
 jobs:
@@ -14,8 +14,8 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8 #install the python needed#OUTPUT=$(python ApiError.py '282053' )
-      - name: Run error report
-        id: error_report
+      - name: step 1
+        id: step1
         run: |
               pip install scrapinghub
               echo "::set-output name=test::hello"
