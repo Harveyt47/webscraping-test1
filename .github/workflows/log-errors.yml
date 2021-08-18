@@ -29,5 +29,5 @@ jobs:
       - name: issue maker 
         uses: imjohnbo/issue-bot@v3
         with:
-          title: ${{ matrix.type }} ${{ matrix.spider }}
+          title: ${{ matrix.spider }}
           body: ${{ matrix.message }}
