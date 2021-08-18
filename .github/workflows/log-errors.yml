@@ -1,8 +1,5 @@
 name: Generate issue from error and warning in our logs
-on: 
-  schedule:
-  # the day of the month we run zyte – https://crontab.guru
-  - cron: 0 0 1 * *
+on: push
 
 jobs:
   errorReport:
