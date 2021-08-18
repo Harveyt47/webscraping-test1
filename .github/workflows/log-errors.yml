@@ -8,7 +8,8 @@ jobs:
   errorReport:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.error_report.outputs.test }}
+      matrix1: ${{ steps.error_report.outputs.errors }}
+      matrix2: ${{ steps.error_report.outputs.items }}
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content to github runner.
@@ -20,20 +21,34 @@ jobs:
         id: error_report
         run: |
               pip install scrapinghub
-              OUTPUT=$(python ApiError.py ${{secrets.APIKEY}} '282053')
-              echo "::set-output name=test::$OUTPUT"
+              errors, items=$(python ApiError.py ${{secrets.APIKEY}} '282053')
+              echo "::set-output name=errors::$errors"
+              echo "::set-output name=items::$items"
+
 
   job2:
     runs-on: ubuntu-latest
     needs: errorReport
     strategy:
       matrix:
-            ${{fromJson(needs.errorReport.outputs.matrix)}} 
+            ${{fromJson(needs.errorReport.outputs.matrix1)}} 
     steps:
       - name: issue maker 
         uses: imjohnbo/issue-bot@v3
         with:
-          title: ${{ matrix.spider }}
+          title: ERROR ${{ matrix.spider }}
+          body: ${{ matrix.message }}
+  job3:
+    runs-on: ubuntu-latest
+    needs: errorReport
+    strategy:
+      matrix:
+            ${{fromJson(needs.errorReport.outputs.matrix2)}} 
+    steps:
+      - name: issue maker 
+        uses: imjohnbo/issue-bot@v3
+        with:
+          title: ITEM ${{ matrix.spider }}
           body: ${{ matrix.message }}
             
       
