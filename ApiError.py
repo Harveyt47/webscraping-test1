@@ -16,9 +16,9 @@ def ApiError(apikey, project_id):
         new_job = project.jobs.get(new_job_key)
         error_logs = new_job.logs.list(level='ERROR')
         if error_logs:
-            message = b''
+            message = ''
             for log in error_logs:
-                message = message + b' ' + log[b'message'] 
+                message = message + ' ' + log['message'] 
             error_matrix["include"].append({'spider':name, 'message':message})
         else:
             try:
