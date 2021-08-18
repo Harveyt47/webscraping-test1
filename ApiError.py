@@ -16,9 +16,36 @@ def ApiError(apikey, project_id):
         error_logs = job.logs.list(level='ERROR')
         if error_logs:
             message = 'has error'
-            matrix["include"].append({'spider':name, 'message':message})
-    print(matrix)
+            matrix["include"].append({'spider':name, 'message':message, 'type':'ERROR'})
+        else:
+            try:
+                num_items_new_job = jobs_list[0]['items']
+                
+            except:
+                matrix["include"].append({'spider':name, 'message':'has no items', 'type':'ITEM'})
+                continue
+                
+            # the loop below searchs for the first old job that has items
+            num_items_old_job=0
+            for job in jobs_list[1:]:
+                try:
+                    num_items_old_job = job['items']
+                    old_job_key = job['key']
+                    break
+                except:
+                    continue
+            
+            if num_items_old_job:
+                if num_items_old_job != num_items_new_job:
+                    matrix["include"].append({'spider':name, 'message':'The number of items returned has changed. Please investigate', 'type':'ITEM'})
+                else:
+                    continue
+            else:
+                continue
+                
+                
     return matrix
+
 
 if __name__ == "__main__":
     ApiError(sys.argv[1], sys.argv[2])
