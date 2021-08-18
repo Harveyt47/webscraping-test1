@@ -19,7 +19,6 @@ jobs:
               pip install scrapinghub
               OUTPUT=$(python ApiError.py ${{secrets.APIKEY}} '282053')
               echo "::set-output name=test::$OUTPUT"
-
   job2:
     runs-on: ubuntu-latest
     needs: errorReport
@@ -30,7 +29,6 @@ jobs:
       - name: issue maker 
         uses: imjohnbo/issue-bot@v3
         with:
-          title: ${{ matrix.type }} ${{ matrix.spider }}
+          title: ${{ matrix.spider }}
           body: ${{ matrix.message }}
             
-      
