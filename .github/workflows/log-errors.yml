@@ -1,5 +1,5 @@
 name: Generate issue from error and warning in our logs
-on: push
+on: workflow_dispatch
 
 jobs:
   errorReport:
